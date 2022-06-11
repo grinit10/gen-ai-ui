@@ -1,0 +1,101 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "apps/openai-parser/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/openai-parser",
+        "index": "apps/openai-parser/src/index.html",
+        "baseHref": "/",
+        "main": "apps/openai-parser/src/main.ts",
+        "polyfills": "apps/openai-parser/src/polyfills.ts",
+        "tsConfig": "apps/openai-parser/tsconfig.app.json",
+        "assets": [
+          "apps/openai-parser/src/favicon.ico",
+          "apps/openai-parser/src/assets"
+        ],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "apps/openai-parser/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/openai-parser/src/environments/environment.ts",
+              "with": "apps/openai-parser/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/openai-parser/webpack.config.prod.js"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "openai-parser:build",
+        "hmr": true,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "openai-parser:build:development"
+        },
+        "production": {
+          "buildTarget": "openai-parser:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/openai-parser/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/openai-parser"],
+      "options": {
+        "jestConfig": "apps/openai-parser/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "openai-parser:build",
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "openai-parser:build:development"
+        },
+        "production": {
+          "buildTarget": "openai-parser:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

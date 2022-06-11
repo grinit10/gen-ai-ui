@@ -2,7 +2,11 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "ui": "apps/ui",
-    "ui-e2e": "apps/ui-e2e"
+    "auth": "apps/auth",
+    "auth-e2e": "apps/auth-e2e",
+    "container": "apps/container",
+    "container-e2e": "apps/container-e2e",
+    "openai-parser": "apps/openai-parser",
+    "openai-parser-e2e": "apps/openai-parser-e2e"
   }
 }
